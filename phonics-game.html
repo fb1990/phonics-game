@@ -585,18 +585,13 @@ function closeAvatarModal() { document.getElementById('avatar-modal').classList.
 
 function updateMap() {
   for (let l = 1; l <= 6; l++) {
-    const stars    = getStars(l);
-    const unlocked = l === 1 || getStars(l - 1) > 0;
-    const node     = document.getElementById('mn-' + l);
-    const starsEl  = document.getElementById('ms-' + l);
-    if (!node) continue;
-    node.classList.toggle('locked', !unlocked);
-    starsEl.textContent = stars > 0 ? '⭐'.repeat(stars) : (unlocked ? '' : '🔒');
+    const stars   = getStars(l);
+    const starsEl = document.getElementById('ms-' + l);
+    if (starsEl) starsEl.textContent = stars > 0 ? '⭐'.repeat(stars) : '';
   }
 }
 
 function handleMapTap(level) {
-  if (level > 1 && getStars(level - 1) === 0) return;
   startLevel(level);
 }
 
